@@ -6,27 +6,27 @@ Using the ALL-CNN network(2015) with state-of-the-art performance at object Reco
 Tensorflow is the most popular tool for deep learning and Keras is a popular API/interface for specifying deep learning models. Keras started as a standalone library for specifying deep learning models which then can be run in Tensorflow, Theano, and other deep learning computation engines. The standalne Keras library still exists but tensorflow has become the dominant engine from deep learning. So the creator of Keras implemented a version of keras that is built into tensorflow , this allows us to specify models with the elegant of keras while taking advantage of some powerful tensorflow features.
 
 A tensor is a matrix(matrix of pixel intensities,etc) with any number of dimensions. Today's, deep learning models applies ,something called, Convulations to this type of tensor. A convulation is a small tensor that can be multiplied over little sections of the main image.<br/>
-example: [ 1.5   1.5
+example: [ 1.5   1.5<br/>
           -1.5  -1.5]<br/>
 **This convulaion is a horizontal line detector**
           
 Convulations are also called filters because depending on the values in that convulation array it can pick out specific patterns from the image. If you multiply(the above convulation ex.) on a part of the image that has a hoz. line, you get a large value. If you mutiply it on a part of image without a hoz. line, you get value close to 0.
 
 Example: say, we have a image with all pixel intensities = 200.<br/>
-[ 200  200 .....
-  200  200 .....
-  ...  ... ..... 
-  ...  ... .....
+[ 200  200 .....<br/>
+  200  200 .....<br/>
+  ...  ... ..... <br/>
+  ...  ... .....<br/>
                 ]
  
 mutiplying the upper left values of each tensor and upper right value of each tensor, so on  and we add them.<br/>
 1.5 * 200 + 1.5 * 200 +(-1.5) * 200 + (-1.5) * 200 = 0
 
 Say, we have black pixels above white pixels( a hoz. line):,br/>
-[ 200  200 .....(black pixels)
-   0    0 ..... (white pixels)
-  ...  ... ..... 
-  ...  ... .....
+[ 200  200 .....(black pixels)<br/>
+   0    0 ..... (white pixels)<br/>
+  ...  ... ..... <br/>
+  ...  ... .....<br/>
                 ]
 <br/> 1.5 * 200 + 1.5 * 200 +(-1.5) * 0 + (-1.5) * 0 = 600 (a large value)
 
