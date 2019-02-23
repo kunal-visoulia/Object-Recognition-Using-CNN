@@ -22,7 +22,7 @@ Example: say, we have a image with all pixel intensities = 200.<br/>
 mutiplying the upper left values of each tensor and upper right value of each tensor, so on  and we add them.<br/>
 1.5 * 200 + 1.5 * 200 +(-1.5) * 200 + (-1.5) * 200 = 0
 
-Say, we have black pixels above white pixels( a hoz. line):,br/>
+Say, we have black pixels above white pixels( a hoz. line):<br/>
 [ 200  200 .....(black pixels)<br/>
    0    0 ..... (white pixels)<br/>
   ...  ... ..... <br/>
