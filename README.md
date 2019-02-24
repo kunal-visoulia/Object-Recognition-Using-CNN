@@ -149,10 +149,10 @@ When using this layer as the first layer in a model, provide the keyword argumen
 
 ### [Strides](https://adeshpande3.github.io/A-Beginner%27s-Guide-To-Understanding-Convolutional-Neural-Networks-Part-2/)
 Stride controls how the filter convolves around the input volume. In the example we had in part 1, the filter convolves around the input volume by shifting one unit at a time. The amount by which the filter shifts is the stride. In that case, the stride was implicitly set at 1. Stride is normally set in a way so that the output volume is an integer and not a fraction. Let’s look at an example. Let’s imagine a 7 x 7 input volume, a 3 x 3 filter (Disregard the 3rd dimension for simplicity), and a stride of 1. <br/>
-https://adeshpande3.github.io/assets/Stride1.png
+![](https://adeshpande3.github.io/assets/Stride1.png)
 
- what will happen to the output volume as the stride increases to 2.<br/>
- https://adeshpande3.github.io/assets/Stride2.png
+what will happen to the output volume as the stride increases to 2.<br/>
+![](https://adeshpande3.github.io/assets/Stride2.png)
   
 ### Padding
 Sometimes filter does not fit perfectly fit the input image. We have two options:
@@ -165,10 +165,10 @@ Pooling layers section would reduce the number of parameters when the images are
 - Taking the largest element could also take the **average pooling**. 
 - Sum of all elements in the feature map call as **sum pooling**. 
 
-https://adeshpande3.github.io/assets/MaxPool.png<br/>
+![](https://adeshpande3.github.io/assets/MaxPool.png)<br/>
 sourc: https://adeshpande3.github.io/A-Beginner%27s-Guide-To-Understanding-Convolutional-Neural-Networks-Part-2/
 
-https://cdn-images-1.medium.com/max/800/1*gags_WLu961iw6I0ZX6iQA.png<br/>
+![](https://cdn-images-1.medium.com/max/800/1*gags_WLu961iw6I0ZX6iQA.png)<br/>
 source: https://medium.com/technologymadeeasy/the-best-explanation-of-convolutional-neural-networks-on-the-internet-fbb8b1ad5df8
 
 
