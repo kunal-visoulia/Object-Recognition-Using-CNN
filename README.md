@@ -1,16 +1,36 @@
 # Object-Recognition-Using-CNN
-Using the ALL-CNN network(2015) with state-of-the-art performance at object Recognition in CIFAR-10 image dataset
+Using the All-CNN network with state-of-the-art performance at object recognition on the CIFAR-10 image dataset published in the 2015 ICLR paper, "Striving For Simplicity: The All Convolutional Net".  This paper can be found at the following link:
+
+https://arxiv.org/pdf/1412.6806.pdf
+
+### DATASET
+The dataset used is the CIFAR-10 dataset, which consists of 60,000 32x32 color images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images. The images are blurry(32x32 pixels only), Humans were only 94% accurate in classifying.
+
+### DATASET PREPROCESSING
+We need to preprocess the dataset so the images and labels are in a form that Keras can ingest
+- normalize the images.
+- convert our class labels to one-hot vectors. This is a standard output format for neural networks(*The class labels are a single integer value (0-9). What we really want is a one-h***we'll save some time by loading pre-trained weights for the All-CNN network. Using these weights, we can evaluate the performance of the All-CNN network on the testing dataset.***
+16
+ot vector of length ten because it is easier for CNN to output and it avoids biases to higher numbers; CNN is numerical,ex , a class value of 6 would skew the weights a lot differently than class label 1 . For example, the class label of 6 should be denoted [0, 0, 0, 0, 0, 0, 1, 0, 0, 0]. We can accomplish this using the np_utils.to_categorical() function*).
+
+>The original paper mentions that it took approximately 10 hours to train the All-CNN network for 350 epochs using a modern GPU, which is considerably faster (several orders of magnitude) than it would take to train on CPU.**So I used pre-trained weights**
+
+weight_decay=1e-6
+momentum=0.9
+sgd;nesterov
+pre trained weights
+verbse
 
 
 ### [DEEP LEARNING](https://www.kaggle.com/dansbecker/intro-to-deep-learning-and-computer-vision)
 Tensorflow is the most popular tool for deep learning and Keras is a popular API/interface for specifying deep learning models. Keras started as a standalone library for specifying deep learning models which then can be run in Tensorflow, Theano, and other deep learning computation engines. The standalne Keras library still exists but tensorflow has become the dominant engine from deep learning. So the creator of Keras implemented a version of keras that is built into tensorflow , this allows us to specify models with the elegant of keras while taking advantage of some powerful tensorflow features.
 
-A tensor is a matrix(matrix of pixel intensities,etc) with any number of dimensions. Today's, deep learning models applies ,something called, Convulations to this type of tensor. A convulation is a small tensor that can be multiplied over little sections of the main image.<br/>
+A tensor is a matrix(matrix of pixel intensities,etc) with any number of dimensions. Today's, deep learning models applies ,something called, Convolutions to this type of tensor. A Convolution is a small tensor that can be multiplied over little sections of the main image.<br/>
 example: [ 1.5   1.5<br/>
           -1.5  -1.5]<br/>
 **This convulaion is a horizontal line detector**
           
-Convulations are also called filters because depending on the values in that convulation array it can pick out specific patterns from the image. If you multiply(the above convulation ex.) on a part of the image that has a hoz. line, you get a large value. If you mutiply it on a part of image without a hoz. line, you get value close to 0.
+Convolutions are also called filters because depending on the values in that convulation array it can pick out specific patterns from the image. If you multiply(the above convulation ex.) on a part of the image that has a hoz. line, you get a large value. If you mutiply it on a part of image without a hoz. line, you get value close to 0.
 
 Example: say, we have a image with all pixel intensities = 200.<br/>
 [ 200  200 .....<br/>
@@ -30,7 +50,7 @@ Say, we have black pixels above white pixels( a hoz. line):<br/>
                 ]
 <br/> 1.5 * 200 + 1.5 * 200 +(-1.5) * 0 + (-1.5) * 0 = 600 (a large value)
 
-Size of a convulation can vary but it is the value inside it that determines what type of patterns it detects.<br/>
+Size of a Convolution can vary but it is the value inside it that determines what type of patterns it detects.<br/>
 You don't directly choose the numbers to go into your convolutions for deep learning, instead the deep learning technique determines what convolutions will be useful from the data (as part of model-training using gradient descent and back propagation). Using these way to automatic create filters means we can have a large number of filters, to capture many different patterns. Each convulation we apply to the original 2D tensor(pixel intensity matrix) creates new 2D tensors a new
 and we stack all these 2D tensors into a 3D tensor, this gives a the representation of image in 3D(1st dimension for hoz rows of pixels,2nd dim. for vertical columns and 3rd dim.(**the channel dimension**) for different convulation's outputs ).<br/>
 Now we apply a new convulation layer(each set of convulations that get applied at the same time is called a layer) to this output 3D tensor(this contains patterns like hoz and vert. lines, dark spots locations, etc). This 2nd layer of convulations takes this map of pattern locations as input and multiplies it with 3D layer of convulations to find more complex patterns(black and white pixels combination => hoz and vert. lines combination => shapes(boxes,etc); concentric circles to wheels, etc and this may help us detect a car) and so on.After a number of layers and filters, we have a 3Dtensor with a rich summary of image content.
@@ -39,3 +59,15 @@ Now we apply a new convulation layer(each set of convulations that get applied a
 Once you create a filter, we apply it to each part of the image and map the output to an output tensor. This gives us a map showing where the associated pattern shows up in the image.
 
 > While any one convolution measures only a single pattern, there are more possible convolutions that can be created with large sizes. So there are also more patterns that can be captured with large convolutions.<br/>For example, it's possible to create a 3x3 convolution that filters for bright pixels with a dark one in the middle. There is no configuration of a 2x2 convolution that would capture this.On the other hand, anything that can be captured by a 2x2 convolution could also be captured by a 3x3 convolution.<br/>Does this mean powerful models require extremely large convolutions? Not necessarily. In the next lesson, you will see how deep learning models put together many convolutions to capture complex patterns... including patterns to complex to be captured by any single convolution.
+
+## [Convolutional Neural Networks(CNN or ConvNets)](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)
+images recognition, images classifications. Objects detections, recognition faces etc., are some of the areas where CNNs are widely used.
+
+CNN image classifications takes an input image, process it and classify it under certain categories (Eg., Dog, Cat, Tiger, Lion). Based on the image resolution, it will see h x w x d( h = Height, w = Width, d = Dimension ). Eg., An image of 6 x 6 x 3 array of matrix of RGB (3 refers to RGB values) and an image of 4 x 4 x 1 array of matrix of grayscale image.
+
+Technically, deep learning CNN models to train and test, each input image will pass it through a series of convolution layers with filters (Kernals), Pooling, fully connected layers (FC) and apply Softmax function to classify an object with probabilistic values between 0 and 1. The below figure is a complete flow of CNN to process an input image and classifies the objects based on values
+
+Convolution of an image with different filters can perform operations such as edge detection, blur and sharpen by applying filters. The below example shows various convolution image after applying different types of filters (Kernels).
+
+![](https://cdn-images-1.medium.com/max/800/1*uJpkfkm2Lr72mJtRaqoKZg.png)
+
