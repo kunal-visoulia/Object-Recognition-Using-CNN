@@ -111,33 +111,7 @@ Now we apply a new convulation layer(each set of convulations that get applied a
 ![Imgur](https://i.imgur.com/op9Maqr.png)<br/>
 Once you create a filter, we apply it to each part of the image and map the output to an output tensor. This gives us a map showing where the associated pattern shows up in the image.
 
-> While any one convolution measures only a single pattern, there are more possible convolutions that can be created with large sizes. So there are also more patterns that can be captured with large convolutions.<br/>For example, it's possible to create a 3x3 convolution that filters for bright pixels with a dark one in the middle. There is no configuration of a 2x2 convolution that would capture this.On the other hand, anything that can be captured by a 2x2 convolution could also be captured by a 3x3 convolution.<br/>Does this mean powerful models require extremely large convolutions? Not necessarily. In the next lesson, you will see how deep learning  model=Sequential()#we will be adding one layer after another
-    
-    #not the input layer but need to tell the conv. layer to accept input
-    model.add(Conv2D(96,(3,3),padding='same',input_shape=(32,32,3)))#32x32x3 channels
-    model.add(Activation('relu'))#required for each conv. layer
-    model.add(Conv2D(96,(3,3),padding='same'))
-    model.add(Activation('relu'))
-    model.add(Conv2D(96,(3,3),padding='same',strides=(2,2)))
-    model.add(Dropout(0.5))#drop neurons randomly;helps the network generalize(prevent overfitting on training data) better so instead of having individual neurons 
-    #that are controlling specific classes/features, the features are spread out over the entire network
-    
-    model.add(Conv2D(192,(3,3),padding='same'))
-    model.add(Activation('relu'))
-    model.add(Conv2D(192,(3,3),padding='same'))
-    model.add(Activation('relu'))
-    model.add(Conv2D(192,(3,3),padding='same',strides=(2,2)))
-    model.add(Dropout(0.5))
-    
-    model.add(Conv2D(192,(3,3),padding='same'))
-    model.add(Activation('relu'))
-    model.add(Conv2D(192,(1,1),padding='valid'))
-    model.add(Activation('relu'))
-    model.add(Conv2D(10,(1,1),padding='valid'))
-    
-    # add GlobalAveragePooling2D layer with Softmax activation
-    model.add(GlobalAveragePooling2D())
-    model.add(Activation('softmax'))models put together many convolutions to capture complex patterns... including patterns to complex to be captured by any single convolution.
+> While any one convolution measures only a single pattern, there are more possible convolutions that can be created with large sizes. So there are also more patterns that can be captured with large convolutions.<br/>For example, it's possible to create a 3x3 convolution that filters for bright pixels with a dark one in the middle. There is no configuration of a 2x2 convolution that would capture this.On the other hand, anything that can be captured by a 2x2 convolution could also be captured by a 3x3 convolution.<br/>Does this mean powerful models require extremely large convolutions? Not necessarily
 
 ## [Convolutional Neural Networks(CNN or ConvNets)](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)
 images recognition, images classifications. Objects detections, recognition faces etc., are some of the areas where CNNs are widely used.
