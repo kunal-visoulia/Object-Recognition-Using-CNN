@@ -52,7 +52,28 @@ sgd;nesterov
 
 **[softmax vs sigmoid](http://dataaspirant.com/2017/03/07/difference-between-softmax-function-and-sigmoid-function/)**
 
-**[pre-trained neural networks](https://stats.stackexchange.com/questions/193082/what-is-pre-training-a-neural-network)**
+**[pre-trained neural networks](https://stats.stackexchange.com/questions/193082/what-is-pre-training-a-neural-network)**: You are now interested in training a network to perform a new task (e.g. object detection) on a different data set (e.g. images too but not the same as the ones you used before). Instead of repeating what you did for the first network and start from training with randomly initialized weights, you can use the weights you saved from the previous network as the initial weight values for your new experiment. Initializing the weights this way is referred to as using a pre-trained network. The first network is your pre-trained network. The second one is the network you are fine-tuning. <vbr/>
+The first task used in pre-training the network can be the same as the fine-tuning stage. The datasets used for pre-training vs. fine-tuning **can also be the same, but can also be different**. It's really interesting to see how pre-training on a different task and different dataset can still be transferred to a new dataset and new task that are **slightly different/**. Using a pre-trained network generally makes sense if both tasks or both datasets have something in common.**The bigger the gap, the less effective pre-training will be**. It makes little sense to pre-train a network for image classification by training it on financial data first. In this case there's too much disconnect between the pre-training and fine-tuning stages.
+
+### Stochastic Gradient Descent(modification to the basic batch gradient descent algorithm(Batch Size from training size to 1 trainng example))
+For many learning algorithms, among them linear regression, logistic regression and neural networks, the way we derive the algorithm was by coming up with a cost function or coming up with an optimization objective. And then using an algorithm like gradient descent to minimize that cost function But, We have a very large training set gradient descent becomes a computationally very expensive procedure.
+
+**Batch Gradient Descent**<br/>
+**A picture of what gradient descent does**, if the parameters are initialized to the point there then as you run gradient descent different iterations of gradient descent will take the parameters to the global minimum. So take a **trajectory** (red line)to the global minimum. <br/>
+![](images/1.png)
+
+![](https://i.stack.imgur.com/pYVzl.png)<br/>
+Now, the problem with gradient descent is that if m is large. Then computing this derivative term can be very expensive, because this requires summing over all m examples.<br/>
+
+Imagine that you have 300 million census records stored away on disc. The way Batch Gradient Descent algorithm works is you need to read into your computer memory all 300 million records in order to compute this derivative term. You need to stream all of these records through computer because you can't store all your records in computer memory. So you need to read through them and slowly, and accumulate the sum in order to compute the derivative. And then having done all that work, that allows you to take **one step of gradient descent(blue line)**.<br/>
+![](images/2.png)<br/>
+And now you need to do the *whole thing again. Scan through all 300 million records, accumulate these sums*. And having done all that work, you can take another little step using gradient descent. And then do that again. And then you take yet a third step. And so on. And so it's gonna take a long time in order to get the algorithm to converge to a minima. 
+
+**In contrast, SGD** doesn't need to look at all the training examples in every single iteration, but that needs to look at only a single training example in one iteration.<br/>
+
+
+
+
 
 ### [DEEP LEARNING](https://www.kaggle.com/dansbecker/intro-to-deep-learning-and-computer-vision)
 Tensorflow is the most popular tool for deep learning and Keras is a popular API/interface for specifying deep learning models. Keras started as a standalone library for specifying deep learning models which then can be run in Tensorflow, Theano, and other deep learning computation engines. The standalne Keras library still exists but tensorflow has become the dominant engine from deep learning. So the creator of Keras implemented a version of keras that is built into tensorflow , this allows us to specify models with the elegant of keras while taking advantage of some powerful tensorflow features.
