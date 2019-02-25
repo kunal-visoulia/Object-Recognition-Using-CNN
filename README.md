@@ -80,7 +80,7 @@ Steps of SGD:<br/>
 ![](images/3.png)<br/>
 we're going to look at the first example and modify the parameters a little bit to fit just the first training example a little bit better. Having done this, then going to go on to the second training example. And take another little step in parameter space, so modify the parameters just a little bit to try to fit just a second training example a little bit better. Having done that, is then going to go onto my third training example and so on till m training examples.
 
-![Note](https://towardsdatascience.com/difference-between-batch-gradient-descent-and-stochastic-gradient-descent-1187f1291aa1):<br/>
+[Note](https://towardsdatascience.com/difference-between-batch-gradient-descent-and-stochastic-gradient-descent-1187f1291aa1):<br/>
 a) In SGD, before for-looping, you need to randomly shuffle the training examples(in the interest of safety, it's usually better to randomly shuffle the data set if you aren't sure if it came to you in randomly sorted order). So, This ensures that when we scan through the training set here, that we end up visiting the training examples in some sort of randomly sorted order.
 b) In SGD, because it’s using only one example at a time, its path to the minima is noisier (more random;**pink line starting from pink x**) than that of the batch gradient(red line). But it’s ok as we are indifferent to the path, as long as it gives us the minimum AND the shorter training time.<br/>
 ![](images/4.png)<br/>
